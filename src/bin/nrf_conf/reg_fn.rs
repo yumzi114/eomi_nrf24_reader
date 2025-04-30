@@ -40,22 +40,11 @@ pub async fn write_register(
     value: &[u8])
 {
     let len = 1 + value.len();
-    // const asd: /* Type */ = value.len()+1;
-    // let asd: usize = value.len()+1;
     let mut tx_buffer = [0_u8; 32];
     let mut rx_buffer = [0_u8; 32];
-    // let mut buffer = Vec::<_, 12>::new();
-    // buffer.push(0b0010_0000 | (reg & 0x1F)).unwrap();
-
     tx_buffer[0] = W_REGISTER | (reg & 0x1F);
     tx_buffer[1..(1 + value.len())].copy_from_slice(value);
-    // buffer[0] = 0b0010_0000 | (reg & 0x1F); 
-    // buffer[1..].copy_from_slice(value);
-    // nss.set_low();
     spi.transfer(&mut rx_buffer[..len], &mut tx_buffer[..len]).unwrap();
-    // spi.transfer(&mut rx_buffer[..len], &mut tx_buffer[..len]).await.unwrap();
-    // nss.set_high();
-    // Timer::after(Duration::from_millis(10)).await;
 
 }
 
@@ -65,7 +54,5 @@ pub async fn flush_rx(
 ) {
     let mut buf = [FLUSH_RX];
     let mut rx_buf = [0x00];
-    // nss.set_low();
     spi.transfer(&mut rx_buf, &mut buf).unwrap();
-    // nss.set_high();
 }
