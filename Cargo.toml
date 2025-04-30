@@ -36,6 +36,11 @@ nb = "1.0.0"
 # static_cell = "2"
 chrono = { version = "^0.4", default-features = false}
 embassy-time = "0.4.0"
+embedded-graphics-core = "0.4.0"
+embedded-graphics = "0.8.1"
+profont = "0.7.0"
+display-interface-i2c = "0.5.0"
+oled_async = { version = "0.1.0-alpha1", features = ["i2c"] }
 
 [profile.release]
 debug = 2
